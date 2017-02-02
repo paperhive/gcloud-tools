@@ -4,6 +4,6 @@ set -eu
 
 for NAMESPACE in ${NAMESPACES}; do
   SUCCEEDED_PODS=$(kubectl --namespace=${NAMESPACE} get pods -a -o json | jq -r '.items | map(select(.status.phase == "Succeeded") | .metadata.name) | .[]' | paste -sd " " -)
-  if [ -z "$SUCCEEDED_PODS" ]; then continue fi
+  if [ -z "$SUCCEEDED_PODS" ]; then continue; fi
   kubectl --namespace=${NAMESPACE} delete pods ${SUCCEEDED_PODS}
 done
