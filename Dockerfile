@@ -1,6 +1,7 @@
 FROM google/cloud-sdk
 
 RUN apt-get update && apt-get install -y git jq
+RUN ssh-keygen -R github.com
 
 COPY cleanup-pods /usr/bin/cleanup-pods
 COPY cleanup-branches /usr/bin/cleanup-branches
