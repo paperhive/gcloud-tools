@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -eu
+set -o pipefail
 
 for NAMESPACE in ${NAMESPACES}; do
   SUCCEEDED_PODS=$(kubectl --namespace=${NAMESPACE} get pods -a -o json | jq -r '.items | map(select(.status.phase == "Succeeded") | .metadata.name) | .[]' | paste -sd " " -)
